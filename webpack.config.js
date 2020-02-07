@@ -10,6 +10,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const isProd = args.prod
 const isDev = args.dev
 const env = args.envFile
@@ -44,7 +46,10 @@ const plugins = [
     'process.env.CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
     'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
     'process.env.SKIP_GOOGLE_AUTH': JSON.stringify(process.env.SKIP_GOOGLE_AUTH)
-  })
+  }),
+  new CopyWebpackPlugin([
+    { from: 'radar-data' }
+  ])
 ]
 
 if (isProd) {
